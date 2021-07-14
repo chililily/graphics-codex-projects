@@ -1,13 +1,13 @@
 Application Log
-Start: Mon Jul 12 18:46:28 2021
+Start: Tue Jul 13 20:55:13 2021
 
 WARNING: AudioDevice is not enabled. Set G3DSpecification::audio = true before invoking initGLG3D() to enable audio.
-Initializing System::findDataFile took 0.005317s
+Initializing System::findDataFile took 0.002606s
 
 Entering GApp::GApp()
-cwd = C:\Users\Vox-N\source\repos\test\data-files
-System::setAppDataDir("C:\Users\Vox-N\source\repos\test\data-files")
-System::setAppDataDirs()Initializing System::findDataFile took 0.000484s
+cwd = C:\Users\Vox-N\source\repos\cubes\cubes_warmup\data-files
+System::setAppDataDir("C:\Users\Vox-N\source\repos\cubes\cubes_warmup\data-files")
+System::setAppDataDirs()Initializing System::findDataFile took 0.001978s
 Setting video mode
 wglSwapIntervalEXT(0);
 Setting initial rendering state.
@@ -118,8 +118,8 @@ Red                                8 bits   ok
 Green                              8 bits   ok
 Blue                               8 bits   ok
 FSAA                       1     1    ok
-Width                 1368 pixels           ok
-Height                 776 pixels           ok
+Width                 2810 pixels           ok
+Height                1592 pixels           ok
 Mode                   Windowed             ok
 
 This driver does support G3D 10:
@@ -131,8 +131,8 @@ GPU Supports OpenGL 4.1 or later    yes - OpenGL version on this driver is 4.42
 Done initializing RenderDevice.
 Network StartupSystem = { 
     App { 
-        Name = "C:\\Users\\Vox-N\\source\\repos\\test\\x64\\Release\\cubes_warmup.exe"
-        cwd = "C:\\Users\\Vox-N\\source\\repos\\test\\data-files"
+        Name = "C:\\Users\\Vox-N\\source\\repos\\cubes\\cubes_warmup\\x64\\Release\\cubes_warmup.exe"
+        cwd = "C:\\Users\\Vox-N\\source\\repos\\cubes\\cubes_warmup\\data-files"
     } 
     
     OS { 
@@ -176,8 +176,8 @@ Network StartupSystem = {
         Full screen = false; 
         Top = 0 ;
         Left = 0 ;
-        Width = 1368 ;
-        Height = 776 ;
+        Width = 2810 ;
+        Height = 1592 ;
         Refresh rate = -1 ;
         
         Alpha bits = 0 ;
@@ -602,7 +602,9 @@ Done GApp::loadFont(...)
 Done GApp::GApp()
 
 Found scenes:
-  "Test Scene" (C:\Users\Vox-N\source\repos\test\data-files/test.Scene.Any)
+  "Cornell Box" (C:\Users\Vox-N\source\repos\cubes\cubes_warmup\data-files/scene/cornellBox.Scene.Any)
+  "White Cube" (C:\Users\Vox-N\source\repos\cubes\cubes_warmup\data-files/scene/whitecube.Scene.Any)
+  "Test Scene" (C:\Users\Vox-N\source\repos\cubes\cubes_warmup\data-files/test.Scene.Any)
   "G3D Debug Animation (Skeletal)" (C:\Users\Vox-N\g3d\data10\common/scene/G3D_Debug_Animation_(Skeletal).Scene.Any)
   "G3D Debug Area Light (Glossy)" (C:\Users\Vox-N\g3d\data10\common/scene/G3D_Debug_Area_Light_(Glossy).Scene.Any)
   "G3D Debug Area Light (Matte)" (C:\Users\Vox-N\g3d\data10\common/scene/G3D_Debug_Area_Light_(Matte).Scene.Any)
@@ -672,7 +674,9 @@ Found scenes:
   "G3D Beta Squadron" (C:\Users\Vox-N\g3d\data10\game/scene/beta.Scene.Any)
   "G3D AR Mountain" (C:\Users\Vox-N\g3d\data10\game/scene/G3D_AR_Mountain/G3D_AR_Mountain.Scene.Any)
 Found scenes:
-  "Test Scene" (C:\Users\Vox-N\source\repos\test\data-files/test.Scene.Any)
+  "Cornell Box" (C:\Users\Vox-N\source\repos\cubes\cubes_warmup\data-files/scene/cornellBox.Scene.Any)
+  "White Cube" (C:\Users\Vox-N\source\repos\cubes\cubes_warmup\data-files/scene/whitecube.Scene.Any)
+  "Test Scene" (C:\Users\Vox-N\source\repos\cubes\cubes_warmup\data-files/test.Scene.Any)
   "G3D Debug Animation (Skeletal)" (C:\Users\Vox-N\g3d\data10\common/scene/G3D_Debug_Animation_(Skeletal).Scene.Any)
   "G3D Debug Area Light (Glossy)" (C:\Users\Vox-N\g3d\data10\common/scene/G3D_Debug_Area_Light_(Glossy).Scene.Any)
   "G3D Debug Area Light (Matte)" (C:\Users\Vox-N\g3d\data10\common/scene/G3D_Debug_Area_Light_(Matte).Scene.Any)
@@ -793,205 +797,4 @@ Fragment info
 
 
 
-G3D Inserted Code(21) : warning C7508: extension NV_shader_buffer_store not supported
-Compute info
-------------
-0(21) : warning C7508: extension NV_shader_buffer_store not supported
-
-G3D Inserted Code(21) : warning C7508: extension NV_shader_buffer_store not supported
-Compute info
-------------
-0(21) : warning C7508: extension NV_shader_buffer_store not supported
-
-
-G3D Inserted Code(21) : warning C7508: extension NV_shader_buffer_store not supported
-Compute info
-------------
-0(21) : warning C7508: extension NV_shader_buffer_store not supported
-
-
-G3D Inserted Code(21) : warning C7508: extension NV_shader_buffer_store not supported
-Compute info
-------------
-0(21) : warning C7508: extension NV_shader_buffer_store not supported
-
-G3D Inserted Code(21) : warning C7508: extension NV_shader_buffer_store not supported
-Compute info
-------------
-0(21) : warning C7508: extension NV_shader_buffer_store not supported
-
-G3D Inserted Code(21) : warning C7508: extension NV_shader_buffer_store not supported
-Compute info
-------------
-0(21) : warning C7508: extension NV_shader_buffer_store not supported
-
-G3D Inserted Code(21) : warning C7508: extension NV_shader_buffer_store not supported
-Compute info
-------------
-0(21) : warning C7508: extension NV_shader_buffer_store not supported
-
-
-
-G3D Inserted Code(21) : warning C7508: extension NV_shader_buffer_store not supported
-Compute info
-------------
-0(21) : warning C7508: extension NV_shader_buffer_store not supported
-
-
-G3D Inserted Code(21) : warning C7508: extension NV_shader_buffer_store not supported
-Compute info
-------------
-0(21) : warning C7508: extension NV_shader_buffer_store not supported
-
-
-_____________________________________________________
-
-    ###    Files Used    ###
-
-cudart64_102.dll
-embree.dll
-optix.6.0.0.dll
-tbb.dll
-tbbmalloc.dll
-avcodec-58.dll
-avdevice-58.dll
-avfilter-7.dll
-avformat-58.dll
-avutil-56.dll
-postproc-55.dll
-swresample-3.dll
-swscale-5.dll
-fmod64.dll
-C:/Users/Vox-N/g3d/G3D10/data-files/font/arial.fnt
-C:/Users/Vox-N/g3d/G3D10/data-files/font/console-small.fnt
-C:/Users/Vox-N/g3d/G3D10/data-files/font/greek.fnt
-C:/Users/Vox-N/g3d/G3D10/data-files/font/icon.fnt
-C:/Users/Vox-N/g3d/G3D10/data-files/gui/osx-10.7.gtm
-C:/Users/Vox-N/g3d/G3D10/data-files/icon/tango.icn
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/AlphaFilter.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/AmbientOcclusion/AmbientOcclusion_AO.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/AmbientOcclusion/AmbientOcclusion_AO.vrt
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/AmbientOcclusion/AmbientOcclusion_constants.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/AmbientOcclusion/AmbientOcclusion_minify.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/AmbientOcclusion/AmbientOcclusion_minify.vrt
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/AmbientOcclusion/AmbientOcclusion_reconstructCSZ.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/AmbientOcclusion/AmbientOcclusion_reconstructCSZ.vrt
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/BumpMap/BumpMap.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/Camera/Camera.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DDGIVolume/../DDGIVolume/DDGIVolume.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DDGIVolume/DDGIVolume.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DDGIVolume/DDGIVolume_EncodeDDGIDistance.glc
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DDGIVolume/DDGIVolume_computeProbeOffsets.glc
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DDGIVolume/DDGIVolume_copyProbeEdges.glc
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DDGIVolume/DDGIVolume_generateRays.glc
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DDGIVolume/DDGIVolume_updateProbeFlags.glc
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DDGIVolume/DDGIVolume_updateProbes.glc
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DefaultRenderer/DefaultRenderer_deferredShade.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DepthOfField/DepthOfField.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DepthOfField/DepthOfField_blur.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DepthOfField/DepthOfField_circleOfConfusion.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/DepthOfField/DepthOfField_composite.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/Film/Film_bloomExpose.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/Film/Film_composite.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/Film/Film_effectsDisabledBlit.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/Film/Film_temporalAA.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/Film/Film_toneMap.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/GBuffer/GBuffer.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/GFont/GFont_render.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/GFont/GFont_render.vrt
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/GaussianBlur/GaussianBlur_apply.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/GuiTheme/GuiTheme_render.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/GuiTheme/GuiTheme_render.vrt
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/Light/Light.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/LightingEnvironment/LightingEnvironment_LightUniforms.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/LightingEnvironment/LightingEnvironment_environmentMapUniforms.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/SkyboxSurface/SkyboxSurface_gbuffer.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/SkyboxSurface/SkyboxSurface_gbuffer.vrt
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/TemporalFilter/TemporalFilter_apply.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/Texture/Texture.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/Texture/Texture_copy.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/UniversalMaterial/UniversalMaterial.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/UniversalMaterial/UniversalMaterial_sample.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/UniversalMaterial/UniversalMaterial_writeToGBuffer.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/UniversalSurface/UniversalSurface_depthOnly.vrt
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/UniversalSurface/UniversalSurface_depthOnlyNonOpaque.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/UniversalSurface/UniversalSurface_gbuffer.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/UniversalSurface/UniversalSurface_gbuffer.vrt
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/UniversalSurface/UniversalSurface_vertex.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/UniversalSurface/UniversalSurface_vertexHelpers.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/compatibility.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/default.vrt
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/deferredHelpers.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/depthPeel.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/g3dmath.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/lightMap.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/octahedral.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/reconstructFromDepth.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/reverseReprojection.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/textureFilter.glsl
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/unlit.pix
-C:/Users/Vox-N/g3d/G3D10/data-files/shader/unlit.vrt
-C:/Users/Vox-N/g3d/data10/common/cubemap/noonclouds/noonclouds_bk.png
-C:/Users/Vox-N/g3d/data10/common/cubemap/noonclouds/noonclouds_dn.png
-C:/Users/Vox-N/g3d/data10/common/cubemap/noonclouds/noonclouds_ft.png
-C:/Users/Vox-N/g3d/data10/common/cubemap/noonclouds/noonclouds_lf.png
-C:/Users/Vox-N/g3d/data10/common/cubemap/noonclouds/noonclouds_rt.png
-C:/Users/Vox-N/g3d/data10/common/cubemap/noonclouds/noonclouds_up.png
-C:/Users/Vox-N/g3d/data10/common/cubemap/uffizi/uffizi+x.jpg
-C:/Users/Vox-N/g3d/data10/common/cubemap/uffizi/uffizi+y.jpg
-C:/Users/Vox-N/g3d/data10/common/cubemap/uffizi/uffizi+z.jpg
-C:/Users/Vox-N/g3d/data10/common/cubemap/uffizi/uffizi-x.jpg
-C:/Users/Vox-N/g3d/data10/common/cubemap/uffizi/uffizi-y.jpg
-C:/Users/Vox-N/g3d/data10/common/cubemap/uffizi/uffizi-z.jpg
-C:/Users/Vox-N/g3d/data10/common/font/eurostyle.fnt
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.ArticulatedModel.Any
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/sponza.mtl
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/sponza.obj
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/background.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/background_bump.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/chain_texture.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/chain_texture_bump.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/chain_texture_mask.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/floor_gloss.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/lion.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/lion_bump.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/spnza_bricks_a_bump.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/spnza_bricks_a_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/spnza_bricks_a_spec.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_arch_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_ceiling_a_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_column_a_bump.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_column_a_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_column_b_bump.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_column_b_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_column_c_bump.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_column_c_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_curtain_blue_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_curtain_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_curtain_green_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_details_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_fabric_blue_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_fabric_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_fabric_green_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_flagpole_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_floor_a_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_roof_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_thorn_bump.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_thorn_diff.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/sponza_thorn_mask.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/vase_bump.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/vase_dif.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/vase_hanging.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/vase_plant.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/vase_plant_mask.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/vase_round.png
-C:/Users/Vox-N/g3d/data10/common/model/crytek_sponza/sponza.zip/textures/vase_round_bump.png
-C:/Users/Vox-N/g3d/data10/common/scene/G3D_Sponza.Scene.Any
-C:/Users/Vox-N/g3d/data10/research/model/sphere/sphere.zip
-C:/Users/Vox-N/g3d/data10/research/model/sphere/sphere.zip/default.mtl
-C:/Users/Vox-N/g3d/data10/research/model/sphere/sphere.zip/sphere-cylcoords-1k.obj
-C:/Users/Vox-N/source/repos/test/data-files/g3d-license.txt
-C:/Users/Vox-N/source/repos/test/data-files/icon.png
-C:/Users/Vox-N/source/repos/test/data-files/log.txt
 

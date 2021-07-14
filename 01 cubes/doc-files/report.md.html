@@ -1,0 +1,50 @@
+   <meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/journal.css?">
+## Report
+
+### System overview
+
+### Coordinate system
+
+### Results
+**Single white cube**
+
+Rotated 45&deg; about the vertical axis with center at (0m, 0m, -2m).
+
+![Single white cube, with axes and wireframe visible.](../journal/2021-07-12__000.jpg)
+
+**Cornell box**
+
+![Cornell box (approximation), with axes and wireframe visible.](../journal/2021-07-13__001.jpg)
+
+### Questions & exercises
+0. Typesetting exercise
+\begin{equation*} \frac{df(x)}{dx} = \lim_{h\rightarrow0} \bigg[ \frac{f(x+h)-f(x-h)}{2h} \bigg]\end{equation*}
+
+1. What are the differences between the `Scene*` and `shared_ptr<Scene>` data types in C++? 
+    
+    In C++, `shared_ptr` is a "smart" pointer class that, in addition to automatically managing its resource, allows co-ownership of a resource.
+
+2. How does G3D know where the scene files are located?
+
+    The `Scene` parser has a member function `setSceneSearchPaths` which can be used to set paths to search for scene files. The parser sets these search paths by default: 
+    
+    * the current directory (as of the time that the first scene is loaded or `getSceneNames()` is invoked),
+
+    * the paths specified by the `G3D10DATA` environment variable,
+
+    * and the directory containing `System::findDataFile`("`scene/CornellBox-Glossy.scn.any`") if not already included in `G3D10Data`.
+
+3. Why should you put your initialization code into `App::onInit` instead of constructor `App::App`? (Tip: There are many reasons. Try throwing an exception from each, and consider the implications of throwing an exception from a class's constructor.)
+
+4. What is the call chain that invokes `App::onGraphics3D`?
+
+5. Where is the file `cube.obj` stored on the file system? How did the `Scene` parser know to load it from there?
+
+    It is stored in `g3d/data10/common/model/cube`.
+
+6. You can create a material in a scene file from a `Color3`. There are many more ways to construct a G3D material, however. One of these takes separate lambertian, glossy, emissive, and transmissive values. Speculate on why a homogeneous material (i.e., one without a pattern or image) would require four separate "colors" in its specification. 
+
+    Object material can have different absorptive/reflective (etc?) properties that affect how light interacts with it and thus produce different looks, e.g. matte or shiny, (mostly) independently of any patterns on the object surface.
+
+<style>em.asterisk { font-style: normal; font-weight: bold; }</style><style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'long'};</script>
+<!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?" charset="utf-8"></script>

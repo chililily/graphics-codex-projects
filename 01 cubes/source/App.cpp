@@ -21,9 +21,9 @@ int main(int argc, const char* argv[]) {
         settings.window.width           = 1920;
         settings.window.height          = 1080;
     } else {
-        settings.window.height          = int(OSWindow::primaryDisplayWindowSize().y * 0.95f); 
+        settings.window.height          = int(OSWindow::primaryDisplayWindowSize().y * 1.95f); 
         // Constrain ultra widescreen aspect ratios
-        settings.window.width           = min(settings.window.height * 1920 / 1080, int(OSWindow::primaryDisplayWindowSize().x * 0.95f));
+        settings.window.width           = min(settings.window.height * 1920 / 1080, int(OSWindow::primaryDisplayWindowSize().x * 1.95f));
 
         // Make even
         settings.window.width  -= settings.window.width & 1;
@@ -91,6 +91,8 @@ void App::onInit() {
     // Make the GUI after the scene is loaded because loading/rendering/simulation initialize
     // some variables that advanced GUIs may wish to reference with pointers.
     makeGUI();
+
+    debugPrintf("Target frame rate = %f Hz\n", 1.0f / realTimeTargetDuration());
 }
 
 

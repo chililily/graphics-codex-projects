@@ -18,6 +18,9 @@
       <Filter>Scene Files</Filter>
     </None>
     <None Include="journal\journal.md.html" />
+    <None Include="data-files\scene\whiteCube.Scene.Any" />
+    <None Include="data-files\scene\cornellBox.Scene.Any" />
+    <None Include="doc-files\report.md.html" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

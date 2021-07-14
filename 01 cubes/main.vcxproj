@@ -14,7 +14,7 @@
     <ProjectGuid>{B87D787E-E674-465A-AED3-8264ED17DFB1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>starter</RootNamespace>
-    <ProjectName>cubes_warmup</ProjectName>
+    <ProjectName>cubes</ProjectName>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -101,7 +101,10 @@
     <ResourceCompile Include="resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data-files\scene\cornellBox.Scene.Any" />
+    <None Include="data-files\scene\whiteCube.Scene.Any" />
     <None Include="data-files\test.Scene.Any" />
+    <None Include="doc-files\report.md.html" />
     <None Include="journal\journal.md.html" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

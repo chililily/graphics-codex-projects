@@ -1,0 +1,121 @@
+// -*- c++ -*-
+
+{
+    name = "Cornell Box";
+
+    models = {
+        cubeModel = ArticulatedModel::Specification
+        {
+            filename = "model/cube/cube.obj";
+            preprocess =
+            {
+                setMaterial(all(), Color3(1, 1, 1));
+            };
+        };
+
+        boxModel = ArticulatedModel::Specification
+        {
+            filename = "model/cube/cube.obj";
+            preprocess =
+            {
+                setMaterial(all(), Color3(1, 1, 1));
+                transformGeometry(all(), Matrix4::scale(1.0, 2.0, 0.5));
+            };
+        };
+
+        redWallModel = ArticulatedModel::Specification
+        {
+            filename = "model/cube/cube.obj";
+            preprocess =
+            {
+                setMaterial(all(), Color3(1, 0, 0));
+                transformGeometry(all(), Matrix4::scale(3.0, 3.0, 0.02));
+            };
+        };
+
+        whiteWallModel = ArticulatedModel::Specification
+        {
+            filename = "model/cube/cube.obj";
+            preprocess =
+            {
+                setMaterial(all(), Color3(1, 1, 1));
+                transformGeometry(all(), Matrix4::scale(3.0, 3.0, 0.02));
+            };
+        };
+
+        greenWallModel = ArticulatedModel::Specification
+        {
+            filename = "model/cube/cube.obj";
+            preprocess =
+            {
+                setMaterial(all(), Color3(0, 1, 0));
+                transformGeometry(all(), Matrix4::scale(3.0, 3.0, 0.02));
+            };
+        };
+    };
+
+    entities =
+    {
+        skybox = Skybox
+        {
+            texture = "cubemap/whiteroom/whiteroom-*.png";
+        };
+
+        sun = Light
+        {
+            bulbPower = Power3(4);
+            frame = CFrame::fromXYZYPRDegrees(0, 1.5, 0, 0, 90, 0);
+            shadowMapSize = Vector2int16(2048, 2048);
+            spotHalfAngleDegrees = 55;
+            rectangular = true;
+            type = "AREA";
+        };
+
+        cube = VisibleEntity
+        {
+            model = "cubeModel";
+            frame = CFrame::fromXYZYPRDegrees(0.5, -1, 0.7, -15, 0, 0);
+        };
+
+        box = VisibleEntity
+        {
+            model = "boxModel";
+            frame = CFrame::fromXYZYPRDegrees(-0.5, -0.5, -0.5, 25, 0, 0);
+        };
+
+        red_wall = VisibleEntity
+        {
+            model = "redWallModel";
+            frame = CFrame::fromXYZYPRDegrees(-1.5, 0, 0, 90, 0, 0);
+        };
+
+        green_wall = VisibleEntity
+        {
+            model = "greenWallModel";
+            frame = CFrame::fromXYZYPRDegrees(1.5, 0, 0, 90, 0, 0);
+        };
+
+        white_wall_top = VisibleEntity
+        {
+            model = "whiteWallModel";
+            frame = CFrame::fromXYZYPRDegrees(0, 1.5, 0, 0, 90, 0);
+        };
+
+        white_wall_side = VisibleEntity
+        {
+            model = "whiteWallModel";
+            frame = CFrame::fromXYZYPRDegrees(0, 0, -1.5, 0, 0, 0);
+        };
+
+        white_wall_bottom = VisibleEntity
+        {
+            model = "whiteWallModel";
+            frame = CFrame::fromXYZYPRDegrees(0, -1.5, 0, 0, 90, 0);
+        };
+
+        camera = Camera
+        {
+            frame = CFrame::fromXYZYPRDegrees(0, 0, 5);
+        };
+    };
+};
