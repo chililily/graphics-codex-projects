@@ -92,10 +92,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="constants.h" />
     <ClInclude Include="source\App.h" />
+    <ClInclude Include="staircase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\App.cpp" />
+    <ClCompile Include="staircase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />

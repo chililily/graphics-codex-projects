@@ -76,13 +76,15 @@ void App::onInit() {
 
     // Call setScene(shared_ptr<Scene>()) or setScene(MyScene::create()) to replace
     // the default scene here.
+    createStaircaseAny();
     
     showRenderingStats      = false;
 
     loadScene(
 
 #       ifndef G3D_DEBUG
-        "G3D Sponza"
+        //"G3D Sponza"
+        "Staircase"
 #       else
         "G3D Simple Cornell Box (Area Light)" // Load something simple
 #       endif

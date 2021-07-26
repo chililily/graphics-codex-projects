@@ -1,18 +1,50 @@
    <meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/journal.css?">
                  **Development Journal**
+2021-07-25
+=====================================================
+**Day work time:** 1h
+
+**Total work time:** 8h05m
+
+Added light source; tweaked parameters for the staircase and light until satisfied.
+
+2021-07-24
+=====================================================
+**Day work time:** 30m
+
+**Total work time:** 7h05m
+
+Stuck with same approach for applying model transforms. Produced some wonky mini staircases, which in hindsight I later realized was because I forgot that positive-z points out of the screen. Whoops.
+
+2021-07-22
+=====================================================
+**Day work time:** 2h30m
+
+**Total work time:** 6h35m
+
+Worked on Staircase task.
+
+Most of the "guts" are done by now, just need to calculate the right transforms to generate the full spiral staircase.
+
+For next time: Read through docs on `CoordinateFrame` class, and review either changing basis or rotating about an arbitrary axis.
+
+2021-07-21
+=====================================================
+**Day work time:** 2h30m
+
+**Total work time:** 4h05m
+
+Worked on Staircase task.
+
+Initially looked into and successfully tested using `G3D::TextOutput` to write to disk, but decided to build using `G3D::Any` because the latter approach requires less micromanaging of formatting.
+
+Spent a lot of time trying to build the scene directly from classes like `ArticulatedModel` before inferring that that was probably not really the intended approach. Admittedly, attempting to do so was because I was a little confused why the exercise in using C++ helper functions to write a scene file when the methods available were not much different from simply writing the file manually. I figured being able to procedurally generate objects (such as the winding stairsteps in this task) was a reason, but I got a bit ahead of myself rather than get a working method first before thinking more deeply on it.
+
 2021-07-13
 =====================================================
-**Sessions:**
+**Day work time:** 1h05m
 
-* 7:00p -- 7:20p
-
-* 7:30p -- 7:45p
-
-* 8:30p -- 9:00p
-
-**Daily work time:** 1h05m
-
-**Project work time:** 1h35m
+**Total work time:** 1h35m
 
 Spent some time doing minor placement tweaks so as to closely approximate placements in the actual Cornell box. Unsure if G3D light is able to be configured to match the Cornell box light.
 

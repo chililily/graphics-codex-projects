@@ -4,9 +4,18 @@
     <ClCompile Include="source\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="staircase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\App.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="staircase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
