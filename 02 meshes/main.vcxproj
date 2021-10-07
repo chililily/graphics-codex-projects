@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -14,7 +14,7 @@
     <ProjectGuid>{B87D787E-E674-465A-AED3-8264ED17DFB1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>starter</RootNamespace>
-    <ProjectName>cubes</ProjectName>
+    <ProjectName>meshes</ProjectName>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -61,7 +61,6 @@
       <Optimization>Disabled</Optimization>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,7 +82,6 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -94,25 +92,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="cube.h" />
     <ClInclude Include="source\App.h" />
-    <ClInclude Include="source\FaceGrid.h" />
-    <ClInclude Include="source\fancyCube.h" />
-    <ClInclude Include="source\staircase.h" />
-    <ClInclude Include="source\utility.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cube.cpp" />
     <ClCompile Include="source\App.cpp" />
-    <ClCompile Include="source\FaceGrid.cpp" />
-    <ClCompile Include="source\fancyCube.cpp" />
-    <ClCompile Include="source\staircase.cpp" />
-    <ClCompile Include="source\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data-files\scene\cornellBox.Scene.Any" />
-    <None Include="data-files\scene\whiteCube.Scene.Any" />
+    <None Include="data-files\cube.off" />
+    <None Include="data-files\scene\cube.Scene.Any" />
     <None Include="data-files\test.Scene.Any" />
     <None Include="doc-files\report.md.html" />
     <None Include="journal\journal.md.html" />

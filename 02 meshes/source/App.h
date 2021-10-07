@@ -6,8 +6,6 @@
  */
 #pragma once
 #include <G3D/G3D.h>
-#include "staircase.h"
-#include "fancyCube.h"
 
 /** \brief Application framework. */
 class App : public GApp {

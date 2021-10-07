@@ -4,27 +4,13 @@
     <ClCompile Include="source\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\staircase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\fancyCube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\utility.cpp" />
-    <ClCompile Include="source\FaceGrid.cpp" />
+    <ClCompile Include="cube.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\staircase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\fancyCube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utility.h" />
-    <ClInclude Include="source\FaceGrid.h" />
+    <ClInclude Include="cube.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />
@@ -35,12 +21,8 @@
     </None>
     <None Include="journal\journal.md.html" />
     <None Include="doc-files\report.md.html" />
-    <None Include="data-files\scene\cornellBox.Scene.Any">
-      <Filter>Scene Files</Filter>
-    </None>
-    <None Include="data-files\scene\whiteCube.Scene.Any">
-      <Filter>Scene Files</Filter>
-    </None>
+    <None Include="data-files\cube.off" />
+    <None Include="data-files\scene\cube.Scene.Any" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

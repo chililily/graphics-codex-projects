@@ -76,8 +76,6 @@ void App::onInit() {
 
     // Call setScene(shared_ptr<Scene>()) or setScene(MyScene::create()) to replace
     // the default scene here.
-   //createAny(".. / data - files / scene / staircase.Scene.Any", "Staircase", buildStaircaseModels(), buildStaircaseEntities());
-    createAny("../data-files/scene/fancyCube.Scene.Any", "Fancy Cube", buildFCModels(), buildFCEntities());
     
     showRenderingStats      = false;
 
@@ -93,8 +91,6 @@ void App::onInit() {
     // Make the GUI after the scene is loaded because loading/rendering/simulation initialize
     // some variables that advanced GUIs may wish to reference with pointers.
     makeGUI();
-
-    debugPrintf("Target frame rate = %f Hz\n", 1.0f / realTimeTargetDuration());
 }
 
 

@@ -1,12 +1,6 @@
 #include "staircase.h"
 
-template <typename T>
-String toString(T x)
-{
-    return String{ std::to_string(x) };
-}
-
-Any buildModels()
+Any buildStaircaseModels()
 {
     Any models_a{ Any::TABLE };
     
@@ -59,7 +53,7 @@ void buildStaircase(Any& entities_a)
     }
 }
 
-void buildLights(Any& entities_a)
+void buildStaircaseLights(Any& entities_a)
 {
     Any sun{ Any::TABLE };
 
@@ -81,23 +75,12 @@ void buildLights(Any& entities_a)
     entities_a["sun"] = sun;
 }
 
-Any buildEntities()
+Any buildStaircaseEntities()
 {
     Any entities_a{ Any::TABLE };
     
     buildStaircase(entities_a);
-    buildLights(entities_a);
+    buildStaircaseLights(entities_a);
 
     return entities_a;
-}
-
-void createStaircaseAny()
-{
-    Any staircase_any{ Any::TABLE };
-    staircase_any["name"] = "Staircase";
-
-    staircase_any["models"] = buildModels();
-    staircase_any["entities"] = buildEntities();
-
-    staircase_any.save("../data-files/scene/staircase.Scene.Any");
 }

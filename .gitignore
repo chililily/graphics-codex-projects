@@ -337,7 +337,8 @@ ASALocalRun/
 # Custom 
 x64
 build
+*.any
 *.db
 *.opendb
-data-files/log.txt
+*log.txt
 data-files/g3d-license.txt

@@ -1,14 +1,70 @@
    <meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/journal.css?">
                  **Development Journal**
-2021-07-25
+2021-10-05: Custom scene (cont.)
+=====================================================
+**Day work time:** not tracked
+
+Debugging: Fixed corner-fill issue. Still need to resolve flag blocking issue.
+
+2021-10-04: Custom scene (cont.)
+=====================================================
+**Day work time:** not tracked
+
+Debugging: Program compiles but does not work as intended; cube fills are concentrated in a corner of each face, and there are too many adjacent cube fills (flag blocking not working correctly).
+
+2021-09-15: Custom scene (cont.)
+=====================================================
+**Day work time:** not tracked
+
+Debugging: Cube extension part of code is causing program to crash, presumably due to an uncaught exception. Maybe the while expression?
+
+2021-08-21: Custom scene (cont.)
+=====================================================
+**Day work time:** not tracked
+
+Debugging. `selectDirections()` is causing program to crash, presumably due to an uncaught exception.
+
+2021-08-05: Custom scene (cont.)
+=====================================================
+**Day work time:** 1h55m
+
+**Total work time:** 13h50m
+
+Continued working on code for generating the cube's decorative faces.
+
+2021-08-03: Custom scene (cont.)
+=====================================================
+**Day work time:** 1h
+
+**Total work time:** 11h55m
+
+Continued working on code for generating the cube's decorative faces.
+
+2021-08-02: Custom scene (cont.)
+=====================================================
+**Day work time:** 2h20m
+
+**Total work time:** 10h55m
+
+Completed cube frame and worked on code for generating the cube's decorative faces.
+
+2021-07-29: Custom scene
+=====================================================
+**Day work time:** 30m
+
+**Total work time:** 8h35m
+
+Started working on custom scene (decorative wooden cube).
+
+2021-07-25: Staircase (cont.)
 =====================================================
 **Day work time:** 1h
 
 **Total work time:** 8h05m
 
-Added light source; tweaked parameters for the staircase and light until satisfied.
+Added light source; tweaked parameters for the staircase and light until satisfied. I decided to add *x*- and *z*-translations to the stairstep transforms to produce a wider spiral, which while arguably not as clean-looking, seems to better approximate most real-world staircases.
 
-2021-07-24
+2021-07-24: Staircase (cont.)
 =====================================================
 **Day work time:** 30m
 
@@ -16,7 +72,7 @@ Added light source; tweaked parameters for the staircase and light until satisfi
 
 Stuck with same approach for applying model transforms. Produced some wonky mini staircases, which in hindsight I later realized was because I forgot that positive-z points out of the screen. Whoops.
 
-2021-07-22
+2021-07-22: Staircase (cont.)
 =====================================================
 **Day work time:** 2h30m
 
@@ -28,7 +84,7 @@ Most of the "guts" are done by now, just need to calculate the right transforms 
 
 For next time: Read through docs on `CoordinateFrame` class, and review either changing basis or rotating about an arbitrary axis.
 
-2021-07-21
+2021-07-21: Staircase
 =====================================================
 **Day work time:** 2h30m
 
@@ -40,7 +96,7 @@ Initially looked into and successfully tested using `G3D::TextOutput` to write t
 
 Spent a lot of time trying to build the scene directly from classes like `ArticulatedModel` before inferring that that was probably not really the intended approach. Admittedly, attempting to do so was because I was a little confused why the exercise in using C++ helper functions to write a scene file when the methods available were not much different from simply writing the file manually. I figured being able to procedurally generate objects (such as the winding stairsteps in this task) was a reason, but I got a bit ahead of myself rather than get a working method first before thinking more deeply on it.
 
-2021-07-13
+2021-07-13: Cornell box
 =====================================================
 **Day work time:** 1h05m
 
@@ -48,30 +104,13 @@ Spent a lot of time trying to build the scene directly from classes like `Articu
 
 Spent some time doing minor placement tweaks so as to closely approximate placements in the actual Cornell box. Unsure if G3D light is able to be configured to match the Cornell box light.
 
-2021-07-12
+2021-07-12: White cube
 =====================================================
-**Sessions:**
-
-8:00p -- 8:30p
-
 **Daily work time:** 30m
 
-**Project work time:** 30m
+**Total work time:** 30m
 
-2019-03-01: Formatting Notes
-=====================================================
-
-This development journal is for you to maintain a log of your project.
-It is in [Markdeep](https://casual-effects.com/markdeep/) format. It is
-readable as plain text but will have additional nice formatting when loaded
-in a web browser.
-
-Put the newest entry at the top of this file, like a blog. Begin the title of
-each section with a date in ISO format (YYYY-MM-DD).
-
-Press *F4* or *F6* in your G3D program to automatically add screenshots and video to 
-this development journal.
-
+Worked on white cube task.
 
 
 <style>em.asterisk { font-style: normal; font-weight: bold; }</style><style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'long'};</script>

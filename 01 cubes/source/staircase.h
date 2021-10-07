@@ -1,5 +1,8 @@
 #pragma once
 
-#include <G3D/G3D.h>
+#include "utility.h"
 
-void createTestAny();
+Any buildStaircaseModels();
+void buildStaircase(Any& entities_a);
+void buildStaircaseLights(Any& entities_a);
+Any buildStaircaseEntities();
