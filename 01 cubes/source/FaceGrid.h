@@ -25,20 +25,22 @@ private:
     GridPlane m_plane;
     std::vector<Cell_ptr> m_grid;
     Cell_ptr m_cursor;
+    bool m_perimeter_blocking;
 
 public:
-    FaceGrid(const int width, const GridPlane plane, const Point3 origin, bool block_perimeter=true)
+    FaceGrid(const int width, const GridPlane plane, const Point3 origin, bool perimeter_blocking=true)
         : m_width{ width },
         m_plane { plane },
         m_origin{ origin }, 
-        m_grid{ std::vector<Cell_ptr>(width * width) }
+        m_grid{ std::vector<Cell_ptr>(width * width) },
+        m_perimeter_blocking{ perimeter_blocking }
     {
         for (auto& cell_ptr : m_grid)
         {
             cell_ptr = std::make_shared<Cell>();
         }
         fillCellAdjacencies();
-        if (block_perimeter) blockPerimeter();
+        if (m_perimeter_blocking) blockPerimeter();
     }
 
     // Initialization helpers
@@ -47,7 +49,9 @@ public:
 
     // Getters & setters
     Point3 origin() const { return m_origin; }
+    auto width() const { return m_width; }
     auto size() const { return m_grid.size(); }
+    int usable() const;
     Cell_ptr at (int grid_index);
     Cell_ptr at (const Point2& grid_position);
     Cell_ptr cursor() const { return m_cursor; }

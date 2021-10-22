@@ -67,6 +67,13 @@ void FaceGrid::blockPerimeter()
     }
 }
 
+// Returns how much usable space (i.e. number of unoccupied cells at initialization) a FaceGrid has.
+int FaceGrid::usable() const
+{
+    if (m_perimeter_blocking) return (m_width - 1) * (m_width - 1);
+    else return size();
+}
+
 Cell_ptr FaceGrid::at(int grid_index)
 { 
     if (grid_index < size())

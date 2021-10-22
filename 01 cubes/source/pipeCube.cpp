@@ -1,5 +1,9 @@
 #include "pipeCube.h"
 
+constexpr int k_face_width{8};
+constexpr bool k_perimeter_blocking{ true };
+constexpr double k_fill_factor{1./3.};
+
 Any buildPCModels()
 {
     Any models_a{ Any::TABLE };
@@ -99,16 +103,14 @@ void addCubeAt(Any& entities_a, Point3 position, int face_id, int count)
     entities_a[entity_name] = fc_unit;
 }
 
-void initFaceGrids(std::vector<FaceGrid>& face_grids)
+void initFaceGrids(std::vector<FaceGrid>& face_grids, int width, bool perimeter_blocking)
 {
-    int width{ 8 };
-
-    face_grids.push_back(FaceGrid{ width, GridPlane::plane_xy, Point3{-3.5, 0., 0.} });
-    face_grids.push_back(FaceGrid{ width, GridPlane::plane_yz, Point3{-3.5, 0., 0.} });
-    face_grids.push_back(FaceGrid{ width, GridPlane::plane_xz, Point3{-3.5, 0., 0.} });
-    face_grids.push_back(FaceGrid{ width, GridPlane::plane_yz, Point3{3.5, 0., 0.} });
-    face_grids.push_back(FaceGrid{ width, GridPlane::plane_xy, Point3{-3.5, 0., 7.} });
-    face_grids.push_back(FaceGrid{ width, GridPlane::plane_xz, Point3{-3.5, 7., 0.} });
+    face_grids.push_back(FaceGrid{ width, GridPlane::plane_xy, Point3{-3.5, 0., 0.}, perimeter_blocking });
+    face_grids.push_back(FaceGrid{ width, GridPlane::plane_yz, Point3{-3.5, 0., 0.}, perimeter_blocking });
+    face_grids.push_back(FaceGrid{ width, GridPlane::plane_xz, Point3{-3.5, 0., 0.}, perimeter_blocking });
+    face_grids.push_back(FaceGrid{ width, GridPlane::plane_yz, Point3{3.5, 0., 0.}, perimeter_blocking });
+    face_grids.push_back(FaceGrid{ width, GridPlane::plane_xy, Point3{-3.5, 0., 7.}, perimeter_blocking });
+    face_grids.push_back(FaceGrid{ width, GridPlane::plane_xz, Point3{-3.5, 7., 0.}, perimeter_blocking });
 }
 
 void decorateFace(Any& entities_a, FaceGrid& face_grid, int face_id)
@@ -118,7 +120,7 @@ void decorateFace(Any& entities_a, FaceGrid& face_grid, int face_id)
     Direction dir;
     int fill{ 0 };
 
-    while (fill < face_grid.size() / 4)
+    while (fill < face_grid.usable() * k_fill_factor)
     {
         grid_index = getRandInt(0, face_grid.size());
 
@@ -164,7 +166,7 @@ void buildPC(Any& entities_a)
     addFrame(entities_a);
 
     std::vector<FaceGrid> faces{};
-    initFaceGrids(faces);
+    initFaceGrids(faces, k_face_width, k_perimeter_blocking);
 
     for (int face_id{ 0 }; face_id < faces.size(); ++face_id)
     {
@@ -180,7 +182,7 @@ void buildPCLights(Any& entities_a)
 
     TextInput attenuation{ TextInput::FROM_STRING, "(0, 0, 1);" };
     TextInput bulb_power{ TextInput::FROM_STRING, "Power3(4e+006);" };
-    TextInput frame{ TextInput::FROM_STRING, "CFrame::fromXYZYPRDegrees(-21, 167, -30, -164, -77, 77);" };
+    TextInput frame{ TextInput::FROM_STRING, "CFrame::fromXYZYPRDegrees(-21, 162, 55, -164, -117, 0);" };
     TextInput shadow_map_size{ TextInput::FROM_STRING, "Point2int16(2048, 2048);" };
 
     sun["attenuation"] = Any{ attenuation };
