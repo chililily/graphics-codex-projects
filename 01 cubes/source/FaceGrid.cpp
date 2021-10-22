@@ -1,93 +1,119 @@
 #include "FaceGrid.h"
 
-Point2 convert(Direction dir)
+void FaceGrid::fillCellAdjacencies()
 {
-    switch (dir)
+    // Fill Cell adjacency like so:
+        // 0 1 3
+        // 2 i 5
+        // 4 6 7
+    for (int i{ 0 }; i < m_grid.size(); ++i)
     {
-    case Direction::dir_north:
-        return Point2{ 0, 1 };
-    case Direction::dir_south:
-        return Point2{ 0, -1 };
-    case Direction::dir_east:
-        return Point2{ -1, 0 };
-    case Direction::dir_west:
-        return Point2{ 1, 0 };
-    case Direction::dir_northeast:
-        return Point2{ -1, 1 };
-    case Direction::dir_southwest:
-        return Point2{ 1, -1 };
-    case Direction::dir_northwest:
-        return Point2{ 1, 1 };
-    case Direction::dir_southeast:
-        return Point2{ -1, -1 };
-    }
-}
+        m_cursor = at(i);
+        m_cursor->setIndex(i);
 
-void DirectionFlagSet::block(Direction dir)
-{
-    auto i_dir{ static_cast<int>(dir) };
-    m_flags[i_dir].block();
-
-    switch (dir)
-    {
-    case Direction::dir_north:
-    case Direction::dir_south:
-    case Direction::dir_east:
-    case Direction::dir_west:
-        return;
-    case Direction::dir_northeast:
-    case Direction::dir_southwest:
-    case Direction::dir_northwest:
-    case Direction::dir_southeast:
-        auto i_ccw{ static_cast<int>(DirectionFlag::counterclockwise(dir)) };
-        auto i_cw{ static_cast<int>(DirectionFlag::clockwise(dir)) };
-        m_flags[i_ccw].block();
-        m_flags[i_cw].block();
-        return;
-    }
-}
-
-GridUnit FaceGrid::at(int x) const 
-{ 
-    if (x < size())
-        return m_grid[x];
-    else 
-        return GridUnit::invalid;
-}
-GridUnit FaceGrid::at(const Point2& v) 
-{ 
-    if (0 <= v.x && v.x < m_width && 0 <= v.y && v.y < m_width)
-    {
-        int index{ toIndex(v) };
-        return m_grid[index];
-    }
-    else
-        return GridUnit::invalid;
-}
-
-void FaceGrid::selectDirections(const Point2& grid_position)
-{
-    m_flagset.reset();
-
-    // Block a random cardinal direction
-    m_flagset.block(static_cast<Direction>(getRandInt(0, 3)));
-
-    // Check ordinal directions, if occupied block any adjacent cardinal directions
-    for (auto flag : m_flagset.vector())
-    {
-        if (at(grid_position + convert(flag.dir())) == GridUnit::occupied)
+        // Not on top edge of grid
+        if (i >= m_width)
         {
-            flag.block();
+            m_cursor->setAdj(Direction::north, m_grid[i - m_width]);
+
+            // Not on left edge
+            if (i % m_width != 0) m_cursor->setAdj(Direction::northwest, m_grid[i - m_width - 1]);
+            // Not on right edge
+            if (i % m_width != m_width - 1) m_cursor->setAdj(Direction::northeast, m_grid[i - m_width + 1]);
+        }
+
+        // Not on left edge
+        if (i % m_width != 0)
+        {
+            m_cursor->setAdj(Direction::west, m_grid[i - 1]);
+
+            // Not on bottom edge
+            if (size() - i > m_width) m_cursor->setAdj(Direction::southwest, m_grid[i + m_width - 1]);
+        }
+
+        // Not on right edge
+        if (i % m_width != m_width - 1)
+        {
+            m_cursor->setAdj(Direction::east, m_grid[i + 1]);
+            
+            // Not on bottom edge;
+            if (size() - i > m_width) m_cursor->setAdj(Direction::southeast, m_grid[i + m_width + 1]);
+        }
+
+        // Not on bottom edge
+        if (size() - i > m_width)
+        {
+            m_cursor->setAdj(Direction::south, m_grid[i + m_width]);
         }
     }
 }
 
-Point2 FaceGrid::move(Point2& grid_position, Direction dir)
+// Fills perimeter of the FaceGrid
+void FaceGrid::blockPerimeter()
 {
-    grid_position += convert(dir);
-    return grid_position;
+    for (int i{ 0 }; i < m_grid.size(); ++i)
+    {
+        m_cursor = at(i);
+
+        // On top or left edge of grid
+        if (i < m_width || i % m_width == 0) m_cursor->fill();
+
+        // On right or bottom edge
+        if (i % m_width == m_width - 1 || size() - i <= m_width)
+        {
+            m_cursor->nullQuadCount();
+            m_cursor->fill();
+        }
+    }
 }
 
+Cell_ptr FaceGrid::at(int grid_index)
+{ 
+    if (grid_index < size())
+        return m_grid[grid_index];
+    else 
+        return nullptr;
+}
+Cell_ptr FaceGrid::at(const Point2& grid_position)
+{ 
+    if (0 <= grid_position.x && grid_position.x < m_width && 0 <= grid_position.y && grid_position.y < m_width)
+    {
+        int index{ toIndex(grid_position) };
+        return m_grid[index];
+    }
+    else
+        return nullptr;
+}
+
+// Returns a cardinal direction for cube extension
+// Assumes cursor points to the cell of a recently placed cube
+Direction FaceGrid::selectExtendDirection()
+{
+    static constexpr std::array<Direction, 4> cardinal{
+        Direction::north,
+        Direction::east,
+        Direction::south,
+        Direction::west
+    };
+
+    int start{ getRandInt(0, 3) };
+
+    int i;
+    for (int tries{0}; tries < 4; ++tries)
+    {
+        i = (start + tries) % cardinal.size();
+        if (cursor()->adj(cardinal[i])->isAvailable()) return cardinal[i];
+    }
+
+    return Direction::max_directions;
+}
+
+Point3 FaceGrid::worldPositionAt(const int grid_index)
+{
+    Point2 grid_position{ toCoordinates(grid_index) };
+
+    return worldPositionAt(grid_position);
+}
 Point3 FaceGrid::worldPositionAt(const Point2& grid_position)
 {
     switch (m_plane)
@@ -99,4 +125,11 @@ Point3 FaceGrid::worldPositionAt(const Point2& grid_position)
     case GridPlane::plane_yz:
         return Point3{ m_origin.x, m_origin.y + grid_position.x, m_origin.z + grid_position.y };
     }
+}
+
+Point3 FaceGrid::cursorWorldPosition()
+{
+    Point2 grid_position{ toCoordinates(m_cursor->index()) };
+
+    return worldPositionAt(grid_position);
 }

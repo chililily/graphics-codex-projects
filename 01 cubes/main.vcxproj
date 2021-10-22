@@ -62,6 +62,7 @@
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ConformanceMode>Default</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -84,6 +85,7 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ConformanceMode>Default</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -95,15 +97,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="source\App.h" />
+    <ClInclude Include="source\Cell.h" />
+    <ClInclude Include="source\Direction.h" />
     <ClInclude Include="source\FaceGrid.h" />
-    <ClInclude Include="source\fancyCube.h" />
+    <ClInclude Include="source\pipeCube.h" />
     <ClInclude Include="source\staircase.h" />
     <ClInclude Include="source\utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\App.cpp" />
+    <ClCompile Include="source\Cell.cpp" />
+    <ClCompile Include="source\Direction.cpp" />
     <ClCompile Include="source\FaceGrid.cpp" />
-    <ClCompile Include="source\fancyCube.cpp" />
+    <ClCompile Include="source\pipeCube.cpp" />
     <ClCompile Include="source\staircase.cpp" />
     <ClCompile Include="source\utility.cpp" />
   </ItemGroup>

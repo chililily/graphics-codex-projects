@@ -7,11 +7,21 @@
     <ClCompile Include="source\staircase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\fancyCube.cpp">
+    <ClCompile Include="source\pipeCube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\utility.cpp" />
-    <ClCompile Include="source\FaceGrid.cpp" />
+    <ClCompile Include="source\FaceGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Direction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Cell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\App.h">
@@ -20,11 +30,21 @@
     <ClInclude Include="source\staircase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\fancyCube.h">
+    <ClInclude Include="source\pipeCube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\utility.h" />
-    <ClInclude Include="source\FaceGrid.h" />
+    <ClInclude Include="source\FaceGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Direction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Cell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />

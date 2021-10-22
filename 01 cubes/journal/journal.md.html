@@ -1,5 +1,46 @@
    <meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/journal.css?">
                  **Development Journal**
+
+2021-10-20: Custom scene (cont.)
+=====================================================
+**Day work time:** not tracked
+
+Fixed quad blocking bug for perimeter-adjacent Cells.
+
+2021-10-20: Custom scene (cont.)
+=====================================================
+**Day work time:** not tracked
+
+Fixed a bug that was causing crashes (character buffer overflow). One remaining logic error to fix, which is that quad blocking doesn't work correctly for Cells adjacent to cube frame.
+
+2021-10-18: Custom scene (cont.)
+=====================================================
+**Day work time:** not tracked
+
+Restructured code handling Quad mechanics to reduce redundancies.
+
+2021-10-13: Custom scene (cont.)
+=====================================================
+**Day work time:** not tracked
+
+Finished first pass on restructuring code, began debugging starting with some unit testing.
+
+2021-10-12: Custom scene (cont.)
+=====================================================
+**Day work time:** not tracked
+
+Moved Cell class, Direction enum class, and associated code to their own files. Removed DirectionFlag and DirectionFlagSet code.
+
+Continued restructuring &Aacute; refactoring code.
+
+Numbering scheme for Direction enum class is a leftover artifact from previous code structure, which I decided to leave unchanged because aside from looking unusual, it doesn't affect anything.
+
+2021-10-08: Custom scene (cont.)
+=====================================================
+**Day work time:** not tracked
+
+Previously (not logged): started restructuring code to follow new approach to blocking problem (replacing most of the Direction/DirectionFlag code). Next: modify selectDirections.
+
 2021-10-05: Custom scene (cont.)
 =====================================================
 **Day work time:** not tracked

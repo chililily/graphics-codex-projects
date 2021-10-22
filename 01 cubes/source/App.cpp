@@ -1,10 +1,14 @@
 /** \file App.cpp */
 #include "App.h"
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 // Tells C++ to invoke command-line main() function even on OS X and Win32.
 G3D_START_AT_MAIN();
 
 int main(int argc, const char* argv[]) {
+
     initGLG3D(G3DSpecification());
 
     GApp::Settings settings(argc, argv);
@@ -76,8 +80,12 @@ void App::onInit() {
 
     // Call setScene(shared_ptr<Scene>()) or setScene(MyScene::create()) to replace
     // the default scene here.
-   //createAny(".. / data - files / scene / staircase.Scene.Any", "Staircase", buildStaircaseModels(), buildStaircaseEntities());
-    createAny("../data-files/scene/fancyCube.Scene.Any", "Fancy Cube", buildFCModels(), buildFCEntities());
+
+    /*std::string stair_filename{ "../data-files/scene/staircase.Scene.Any" };
+    if (!fs::exists(static_cast<fs::path>(stair_filename)))
+        createAny((String)stair_filename, "Staircase", buildStaircaseModels(), buildStaircaseEntities());*/
+
+    createAny("../data-files/scene/pipeCube.Scene.Any", "Pipe Cube", buildPCModels(), buildPCEntities());
     
     showRenderingStats      = false;
 
