@@ -92,12 +92,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="cube.h" />
     <ClInclude Include="source\App.h" />
+    <ClInclude Include="source\makeCylinder.h" />
+    <ClInclude Include="source\OFFdata.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cube.cpp" />
     <ClCompile Include="source\App.cpp" />
+    <ClCompile Include="source\makeCylinder.cpp" />
+    <ClCompile Include="source\OFFdata.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />
