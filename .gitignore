@@ -342,3 +342,4 @@ build
 *.opendb
 *log.txt
 data-files/g3d-license.txt
+test
