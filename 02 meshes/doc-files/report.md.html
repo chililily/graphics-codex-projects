@@ -7,6 +7,7 @@
 
     Summarize your implementation design in no more than two paragraphs. Provide sufficient information to aid future implementors seeking to reproduce your work. Why did you make the program this way? What were your main iteration structures? What were the key G3D routines that you used? 
 -->
+`App::saveOFF` processes an `ArticulatedModel` (assumes a triangular mesh) and saves it as an OFF file.
 
 ### Results
 <!--
@@ -20,12 +21,19 @@ Axis-aligned unit cube centered at origin, coloured blue to help distinguish it 
 
 ![Unit cube](../journal/2021-07-28__000.jpg)
 
+**Cylinder**
+Procedurally generated cylinder.
+![Cylinder](../journal/2022-01-27__000.jpg)
+
 ### Discussion
 <!--
        Describe what you learned while working on this project. Distinguish software engineering, algorithmic, and mathematical skills. Include the reading and ideas that you had to implicitly work through even if not required.  
 -->
 
 ### Questions
+<!--
+   Answer these questions in at most three sentences each 
+-->
 1. G3D uses some real-time rendering tricks to fake reflections of the sky, but if you fly along the shore of my island, you'll see that the water doesn't actually reflect the mountains. How could you simulate the image of the missing reflection in a plane of water or a mirror using only nonreflective 3D models?
 
 Use a transformed version of the image used for the sky as a texture on the appropriate part of the model.
@@ -39,33 +47,6 @@ Use a transformed version of the image used for the sky as a texture on the appr
 <!--
     todo
 -->
-
-### Workflow
-<!--
-    Make a table planning major tasks for this project and then recording your planned and actual time on them, as show in Table 1. Each task should be between 0.5 and 1.5 planned hours. Roll up smaller ones and break down longer ones. Break each task directly corresponding to a deliverable into three versions: a complete first draft, a minimum viable product, and the polished version. Infrastructure tasks that are necessary precursors for others can remain as a single version. 
-
-    How long did the project take you, from start to finish (excluding time spent reading, including time writing the report)? Distinguish time to the minimum viable product vs. polishing time. Report this as two numbers, in hours. 
--->
-
-| Task | Description | Planned time | Actual time |
-| ---- | ----------- | ------------ | ----------- |
-| Report draft | Formatted document with some preliminary responses and placeholder text | 30m | 25m |
-| Unit cube | OFF file specifying an axis-aligned unit cube centered at the origin | 30m | 1h |
-| `makeCylinder` draft | | | |
-| `makeCylinder` MVP | | | |
-| `makeCylinder` polish | | | |
-| `heightfield` draft | | | |
-| `heightfield` MVP | | | |
-| `heightfield` polish | | | |
-| `glass` draft | | | |
-| `glass` MVP | | | |
-| `glass` polish | | | |
-| Custom scene draft | | | |
-| Custom scene MVP | | | |
-| Custom scene polish | | | |
-| Report MVP | | | |
-| Report polish | | | |
-
 
 <style>em.asterisk { font-style: normal; font-weight: bold; }</style><style class="fallback">body{visibility:hidden}</style><script>markdeepOptions={tocStyle:'long'};</script>
 <!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?" charset="utf-8"></script>

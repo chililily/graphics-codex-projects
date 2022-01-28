@@ -92,11 +92,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="cube.h" />
     <ClInclude Include="source\App.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cube.cpp" />
     <ClCompile Include="source\App.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,61 @@
    <meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/journal.css?">
                  **Development Journal**
+2022-01-26:
+=====================================================
+**Day work time**: 30m
+
+**Total work time**: 7h45m
+
+Tested and fixed `saveOFF`. Added results to report. Axed workflow section of report.
+
+**Next time**: Write a procedure that generates a regular heightfield in `data-files/model/heightfield.off` with elevation given by the grayscale values of an image file. Use a file dialog to select the file, a number box to scale the x and z integer coordinates by, and a number box to set the scale that 1.0 corresponds to for height. Make a button labelled “Generate” that launches the generator. Display a message on screen while generating and then flush the G3D::ArticulatedModel cache, and reload the current scene on completion.
+
+2022-01-25:
+=====================================================
+**Day work time**: 30m
+
+**Total work time**: 7h15m
+
+Wrote function to save cylinder model to OFF file (`App::saveOFF`).
+
+**Next time**: Test `App::saveOFF` and get rid of `OFFData` class stuff once working. Add to report.
+
+2022-01-23:
+=====================================================
+**Day work time**: 2h15m
+
+**Total work time**: 6h45m
+
+Finished writing functions that add a cylinder model to a scene (`App::addCylinderToScene`).
+
+**Next time**: write `makeCylinder` to invoke `App::addCylinderToScene` (move `makeCylinder` into `App` class) and convert from model to OFF file.
+
+2022-01-14:
+=====================================================
+**Day work time**: 30m
+
+**Total work time**: 4h30m
+
+Worked on testing `OFFdata::write`. Linker issue with `OFFdata.cpp`; as an easy solution I simply added the `.cpp` file to project `Tests`. Might be resolved through fiddling with include directories.
+
+2021-11-07: 
+=====================================================
+**Day work time**: 1h
+
+**Total work time**: 4h
+
+Resolved linker error: add property sheet (View > Other Windows > Property Manager) `developer-build-paths.props` (g3d\G3D10\Visual Studio\props`) to projects that depend on `G3D`.
+
+Worked on testing for `OFFdata`.
+
+2021-11-06: 
+=====================================================
+**Day work time**: 1h30m
+
+**Total work time**: 3h
+
+Finished writing first draft of `OFFdata` class. Set up unit testing, but having some trouble linking `G3D` library in unit testing project. 
+
 2021-07-28: 
 =====================================================
 **Day work time**: 1h30m

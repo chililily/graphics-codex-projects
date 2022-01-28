@@ -11,7 +11,7 @@ int main(int argc, const char* argv[]) {
 
     // Change the window and other startup parameters by modifying the
     // settings class.  For example:
-    settings.window.caption             = argv[0];
+    settings.window.caption             = "Meshes";
 
     // Set enable to catch more OpenGL errors
     // settings.window.debugContext     = true;
@@ -21,9 +21,9 @@ int main(int argc, const char* argv[]) {
         settings.window.width           = 1920;
         settings.window.height          = 1080;
     } else {
-        settings.window.height          = int(OSWindow::primaryDisplayWindowSize().y * 1.95f); 
+        settings.window.height          = int(OSWindow::primaryDisplayWindowSize().y * 1.5f); 
         // Constrain ultra widescreen aspect ratios
-        settings.window.width           = min(settings.window.height * 1920 / 1080, int(OSWindow::primaryDisplayWindowSize().x * 1.95f));
+        settings.window.width           = min(settings.window.height * 1920 / 1080, int(OSWindow::primaryDisplayWindowSize().x * 1.5f));
 
         // Make even
         settings.window.width  -= settings.window.width & 1;
@@ -65,6 +65,176 @@ int main(int argc, const char* argv[]) {
 App::App(const GApp::Settings& settings) : GApp(settings) {
 }
 
+void App::saveOFF(const shared_ptr<ArticulatedModel>& model, const String& filename, const String& modelName) {
+    TextOutput toOFF(filename);
+
+    // Header
+    toOFF.printf("OFF\n");
+    toOFF.printf("# %s.off\n", modelName.c_str());
+
+    // V F E
+    Array<CPUVertexArray::Vertex>& vertexArray = model->geometry("geom")->cpuVertexArray.vertex;
+    int numVertices = vertexArray.size();
+    auto indexArray = model->mesh("mesh")->cpuIndexArray;
+    int numFaces = indexArray.size() / 3;
+    int numEdges = numFaces * 3 / 2;
+    toOFF.printf("%i %i %i\n", numVertices, numFaces, numEdges);
+
+    // Vertex positions
+    for (const auto v : vertexArray) {
+        //const CPUVertexArray::Vertex& v = vertexArray.next();
+        toOFF.printf("%f %f %f\n", v.position.x, v.position.y, v.position.z);
+    }
+
+    // Face vertices
+    for (int i = 0; i < indexArray.size(); i += 3) {
+        toOFF.printf("3 %i %i %i\n", indexArray[i], indexArray[i + 1], indexArray[i + 2]);
+    }
+
+    toOFF.commit();
+}
+
+shared_ptr<ArticulatedModel> App::createCylinderModel(const float r, const float h) {
+    const shared_ptr<ArticulatedModel>& model = ArticulatedModel::createEmpty("cylinderModel");
+
+    ArticulatedModel::Part* part = model->addPart("root");
+    ArticulatedModel::Geometry* geometry = model->addGeometry("geom");
+    ArticulatedModel::Mesh* mesh = model->addMesh("mesh", part, geometry);
+
+    // Assign a material
+    mesh->material = UniversalMaterial::create(
+        PARSE_ANY(
+            UniversalMaterial::Specification{
+                lambertian = Color3(0.95, 0.6, 0.4);
+            }));
+
+    const int   diskFaces = 20;
+    const float radius = r * units::meters();
+    const float height = h * units::meters();
+
+    Array<CPUVertexArray::Vertex>& vertexArray = geometry->cpuVertexArray.vertex;
+    Array<int>& indexArray = mesh->cpuIndexArray;
+
+    const CFrame& frame = (Matrix4::translation(0.0f, height / 2, 0.0f)).approxCoordinateFrame();
+
+    for (int i = 0; i < 2; ++i) {
+        float vHeight = i * height;
+        // Circular face center
+        CPUVertexArray::Vertex& v = vertexArray.next();
+        v.position = frame.pointToWorldSpace(Point3(0.0f, vHeight, 0.0f) * radius);
+        v.normal = Vector3::nan();
+        v.tangent = Vector4::nan();
+        const int center = i * (diskFaces + 1);
+
+        for (int p = 0; p < diskFaces; ++p) {
+            const float phi = 2.0f * pif() * p / float(diskFaces);
+
+            CPUVertexArray::Vertex& v = vertexArray.next();
+            v.position = frame.pointToWorldSpace(Point3(-cos(phi), vHeight, -sin(phi)) * radius);
+
+            // Set to NaN to trigger automatic vertex normal and tangent computation
+            v.normal = Vector3::nan();
+            v.tangent = Vector4::nan();
+
+            int A;
+            int B;
+            // Create the circular face triangles
+            if (p < diskFaces - 1) {
+                A = 1 + center + p;
+                B = A + 1;
+            }
+            else {
+                A = center + diskFaces;
+                B = center + 1;
+            }
+
+            if (i == 0) {
+                indexArray.append(A, B, center);
+            }
+            else {
+                indexArray.append(B, A, center);
+            }
+        }
+
+    }
+    // Create cylinder wall faces
+        // D-----B
+        // |   / |
+        // | /   |
+        // C-----A
+    for (int i = 1; i < diskFaces; ++i) {
+        const int A = (i + 0);
+        const int B = (i + 0) + (diskFaces + 1);
+        const int C = (i + 1);
+        const int D = (i + 1) + (diskFaces + 1);
+        indexArray.append(
+            A, B, C,
+            B, D, C);
+    }
+    const int A = diskFaces;
+    const int B = 2 * diskFaces + 1;
+    const int C = 1;
+    const int D = diskFaces + 2;
+    indexArray.append(
+        A, B, C,
+        B, D, C);
+
+    // Tell the ArticulatedModel to generate bounding boxes, GPU vertex arrays,
+    // normals and tangents automatically. We already ensured correct
+    // topology, so avoid the vertex merging optimization.
+    ArticulatedModel::CleanGeometrySettings geometrySettings;
+    geometrySettings.allowVertexMerging = false;
+    model->cleanGeometry(geometrySettings);
+
+    return model;
+}
+
+void App::addCylinderToScene(const shared_ptr<Model>& cylinderModel) {
+    // Replace any existing cylinder model. Models don't 
+    // have to be added to the model table to use them 
+    // with a VisibleEntity.
+    if (scene()->modelTable().containsKey(cylinderModel->name())) {
+        scene()->removeModel(cylinderModel->name());
+    }
+    scene()->insert(cylinderModel);
+
+    // Replace any existing cylinder entity that has the wrong type
+    shared_ptr<Entity> cylinder = scene()->entity("cylinder");
+    if (notNull(cylinder) && isNull(dynamic_pointer_cast<VisibleEntity>(cylinder))) {
+        logPrintf("The scene contained an Entity named 'cylinder' that was not a VisibleEntity\n");
+        scene()->remove(cylinder);
+        cylinder.reset();
+    }
+
+    if (isNull(cylinder)) {
+        // There is no cylinder entity in this scene, so make one.
+        //
+        // We could either explicitly instantiate a VisibleEntity or simply
+        // allow the Scene parser to construct one. The second approach
+        // has more consise syntax for this case, since we are using all constant
+        // values in the specification.
+        cylinder = scene()->createEntity("cylinder",
+            PARSE_ANY(
+                VisibleEntity{
+                    model = "cylinderModel";
+                };
+        ));
+    }
+    else {
+        // Change the model on the existing cylinder entity
+        dynamic_pointer_cast<VisibleEntity>(cylinder)->setModel(cylinderModel);
+    }
+
+    cylinder->setFrame(CFrame::fromXYZYPRDegrees(5.0f, -0.5f, -1.0f, 0.0f, 0.0f));
+}
+
+shared_ptr<Model> App::makeCylinder(const float r, const float h) {
+    const shared_ptr<ArticulatedModel> cylinderModel = createCylinderModel(r, h);
+
+    saveOFF(createCylinderModel(r, h), "../data-files/cylinder.off", "cylinder");
+    return cylinderModel;
+}
+
 
 // Called before the application loop begins.  Load data here and
 // not in the constructor so that common exceptions will be
@@ -72,21 +242,12 @@ App::App(const GApp::Settings& settings) : GApp(settings) {
 void App::onInit() {
     GApp::onInit();
 
-    setFrameDuration(1.0f / 240.0f);
-
-    // Call setScene(shared_ptr<Scene>()) or setScene(MyScene::create()) to replace
-    // the default scene here.
-    
+    setFrameDuration(1.0f / 60.0f);
     showRenderingStats      = false;
 
-    loadScene(
-
-#       ifndef G3D_DEBUG
-        "G3D Sponza"
-#       else
-        "G3D Simple Cornell Box (Area Light)" // Load something simple
-#       endif
-        );
+    loadScene("Ground");
+    const shared_ptr<Model> cylinderModel = makeCylinder(0.5, 1.5);
+    addCylinderToScene(cylinderModel);
 
     // Make the GUI after the scene is loaded because loading/rendering/simulation initialize
     // some variables that advanced GUIs may wish to reference with pointers.
@@ -187,140 +348,4 @@ void App::makeGUI() {
 
     debugWindow->pack();
     debugWindow->setRect(Rect2D::xywh(0, 0, (float)window()->width(), debugWindow->rect().height()));
-}
-
-
-// This default implementation is a direct copy of GApp::onGraphics3D to make it easy
-// for you to modify. If you aren't changing the hardware rendering strategy, you can
-// delete this override entirely.
-void App::onGraphics3D(RenderDevice* rd, Array<shared_ptr<Surface> >& allSurfaces) {
-    if (! scene()) {
-        if ((submitToDisplayMode() == SubmitToDisplayMode::MAXIMIZE_THROUGHPUT) && (!rd->swapBuffersAutomatically())) {
-            swapBuffers();
-        }
-        rd->clear();
-        rd->pushState(); {
-            rd->setProjectionAndCameraMatrix(activeCamera()->projection(), activeCamera()->frame());
-            drawDebugShapes();
-        } rd->popState();
-        return;
-    }
-
-    BEGIN_PROFILER_EVENT("App::onGraphics3D");
-    GBuffer::Specification gbufferSpec = m_gbufferSpecification;
-
-    extendGBufferSpecification(gbufferSpec);
-    m_gbuffer->setSpecification(gbufferSpec);
-    m_gbuffer->resize(m_framebuffer->width(), m_framebuffer->height());
-    m_gbuffer->prepare(rd, activeCamera(), 0, -(float)previousSimTimeStep(), m_settings.hdrFramebuffer.depthGuardBandThickness, m_settings.hdrFramebuffer.colorGuardBandThickness);
-    debugAssertGLOk();
-
-    m_renderer->render(rd,
-        activeCamera(),
-        m_framebuffer,
-        scene()->lightingEnvironment().ambientOcclusionSettings.enabled ? m_depthPeelFramebuffer : nullptr,
-        scene()->lightingEnvironment(), m_gbuffer,
-        allSurfaces,
-        [&]() -> decltype(auto) { return scene()->tritree(); }); // decltype(auto) for correct return type deduction in the lambda.
-
-    // Debug visualizations and post-process effects
-    rd->pushState(m_framebuffer); {
-        // Call to make the App show the output of debugDraw(...)
-        rd->setProjectionAndCameraMatrix(activeCamera()->projection(), activeCamera()->frame());
-        drawDebugShapes();
-        const shared_ptr<Entity>& selectedEntity = (notNull(developerWindow) && notNull(developerWindow->sceneEditorWindow)) ? developerWindow->sceneEditorWindow->selectedEntity() : nullptr;
-        scene()->visualize(rd, selectedEntity, allSurfaces, sceneVisualizationSettings(), activeCamera());
-
-        onPostProcessHDR3DEffects(rd);
-    } rd->popState();
-
-    // We're about to render to the actual back buffer, so swap the buffers now.
-    // This call also allows the screenshot and video recording to capture the
-    // previous frame just before it is displayed.
-    if (submitToDisplayMode() == SubmitToDisplayMode::MAXIMIZE_THROUGHPUT) {
-        swapBuffers();
-    }
-
-    // Clear the entire screen (needed even though we'll render over it, since
-    // AFR uses clear() to detect that the buffer is not re-used.)
-    rd->clear();
-
-    // Perform gamma correction, bloom, and AA, and write to the native window frame buffer
-    m_film->exposeAndRender(rd, activeCamera()->filmSettings(), m_framebuffer->texture(0), 
-        settings().hdrFramebuffer.trimBandThickness().x,
-        settings().hdrFramebuffer.depthGuardBandThickness.x,
-        Texture::opaqueBlackIfNull(notNull(m_gbuffer) ? m_gbuffer->texture(GBuffer::Field::SS_POSITION_CHANGE) : nullptr),
-        activeCamera()->jitterMotion());
-    END_PROFILER_EVENT();
-}
-
-
-void App::onAI() {
-    GApp::onAI();
-    // Add non-simulation game logic and AI code here
-}
-
-
-void App::onNetwork() {
-    GApp::onNetwork();
-    // Poll net messages here
-}
-
-
-void App::onSimulation(RealTime rdt, SimTime sdt, SimTime idt) {
-    GApp::onSimulation(rdt, sdt, idt);
-
-    // Example GUI dynamic layout code.  Resize the debugWindow to fill
-    // the screen horizontally.
-    debugWindow->setRect(Rect2D::xywh(0, 0, (float)window()->width(), debugWindow->rect().height()));
-}
-
-
-bool App::onEvent(const GEvent& event) {
-    // Handle super-class events
-    if (GApp::onEvent(event)) { return true; }
-
-    // If you need to track individual UI events, manage them here.
-    // Return true if you want to prevent other parts of the system
-    // from observing this specific event.
-    //
-    // For example,
-    // if ((event.type == GEventType::GUI_ACTION) && (event.gui.control == m_button)) { ... return true; }
-    // if ((event.type == GEventType::KEY_DOWN) && (event.key.keysym.sym == GKey::TAB)) { ... return true; }
-    // if ((event.type == GEventType::KEY_DOWN) && (event.key.keysym.sym == 'p')) { ... return true; }
-
-    if ((event.type == GEventType::KEY_DOWN) && (event.key.keysym.sym == 'p')) { 
-        const shared_ptr<DefaultRenderer>& r = dynamic_pointer_cast<DefaultRenderer>(m_renderer);
-        r->setDeferredShading(! r->deferredShading());
-        return true; 
-    }
-
-    return false;
-}
-
-
-void App::onUserInput(UserInput* ui) {
-    GApp::onUserInput(ui);
-    (void)ui;
-    // Add key handling here based on the keys currently held or
-    // ones that changed in the last frame.
-}
-
-
-void App::onPose(Array<shared_ptr<Surface> >& surface, Array<shared_ptr<Surface2D> >& surface2D) {
-    GApp::onPose(surface, surface2D);
-
-    // Append any models to the arrays that you want to later be rendered by onGraphics()
-}
-
-
-void App::onGraphics2D(RenderDevice* rd, Array<shared_ptr<Surface2D> >& posed2D) {
-    // Render 2D objects like Widgets.  These do not receive tone mapping or gamma correction.
-    Surface2D::sortAndRender(rd, posed2D);
-}
-
-
-void App::onCleanup() {
-    // Called after the application loop ends.  Place a majority of cleanup code
-    // here instead of in the constructor so that exceptions can be caught.
 }
