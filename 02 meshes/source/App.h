@@ -13,8 +13,13 @@ protected:
 
     /** Called from onInit */
     void makeGUI();
-    shared_ptr<Model> createCylinderModel(const float r, const float h);
-    void addCylinderToScene();
+    
+    void saveOFF(const shared_ptr<ArticulatedModel>& model, const String& filename, const String& modelName);
+
+    shared_ptr<ArticulatedModel> createCylinderModel(const float r, const float h);
+    void addCylinderToScene(const shared_ptr<Model>& cylinderModel);
+    // Generates an OFF file for a convex-polygon mesh for a cylinder of the given radius and height, about the y-axis and centered at the origin
+    shared_ptr<Model> makeCylinder(const float r, const float h);
 
 public:
     

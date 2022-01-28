@@ -4,21 +4,9 @@
     <ClCompile Include="source\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\makeCylinder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\OFFdata.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\App.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\OFFdata.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\makeCylinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

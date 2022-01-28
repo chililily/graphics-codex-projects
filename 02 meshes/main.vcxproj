@@ -93,13 +93,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="source\App.h" />
-    <ClInclude Include="source\makeCylinder.h" />
-    <ClInclude Include="source\OFFdata.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\App.cpp" />
-    <ClCompile Include="source\makeCylinder.cpp" />
-    <ClCompile Include="source\OFFdata.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc" />

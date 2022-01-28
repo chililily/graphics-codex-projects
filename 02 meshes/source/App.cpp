@@ -65,7 +65,36 @@ int main(int argc, const char* argv[]) {
 App::App(const GApp::Settings& settings) : GApp(settings) {
 }
 
-shared_ptr<Model> App::createCylinderModel(const float r, const float h) {
+void App::saveOFF(const shared_ptr<ArticulatedModel>& model, const String& filename, const String& modelName) {
+    TextOutput toOFF(filename);
+
+    // Header
+    toOFF.printf("OFF\n");
+    toOFF.printf("# %s.off\n", modelName.c_str());
+
+    // V F E
+    Array<CPUVertexArray::Vertex>& vertexArray = model->geometry("geom")->cpuVertexArray.vertex;
+    int numVertices = vertexArray.size();
+    auto indexArray = model->mesh("mesh")->cpuIndexArray;
+    int numFaces = indexArray.size() / 3;
+    int numEdges = numFaces * 3 / 2;
+    toOFF.printf("%i %i %i\n", numVertices, numFaces, numEdges);
+
+    // Vertex positions
+    for (const auto v : vertexArray) {
+        //const CPUVertexArray::Vertex& v = vertexArray.next();
+        toOFF.printf("%f %f %f\n", v.position.x, v.position.y, v.position.z);
+    }
+
+    // Face vertices
+    for (int i = 0; i < indexArray.size(); i += 3) {
+        toOFF.printf("3 %i %i %i\n", indexArray[i], indexArray[i + 1], indexArray[i + 2]);
+    }
+
+    toOFF.commit();
+}
+
+shared_ptr<ArticulatedModel> App::createCylinderModel(const float r, const float h) {
     const shared_ptr<ArticulatedModel>& model = ArticulatedModel::createEmpty("cylinderModel");
 
     ArticulatedModel::Part* part = model->addPart("root");
@@ -76,8 +105,7 @@ shared_ptr<Model> App::createCylinderModel(const float r, const float h) {
     mesh->material = UniversalMaterial::create(
         PARSE_ANY(
             UniversalMaterial::Specification{
-                lambertian = Color3(0.8, 0.05, 0.1);
-                glossy = Color4(Color3(0.1), 0.5);
+                lambertian = Color3(0.95, 0.6, 0.4);
             }));
 
     const int   diskFaces = 20;
@@ -130,15 +158,15 @@ shared_ptr<Model> App::createCylinderModel(const float r, const float h) {
 
     }
     // Create cylinder wall faces
-        // A-----C
+        // D-----B
         // |   / |
         // | /   |
-        // B-----D
-    for (int i = 1; i < diskFaces - 1; ++i) {
+        // C-----A
+    for (int i = 1; i < diskFaces; ++i) {
         const int A = (i + 0);
-        const int B = (i + 0) + (diskFaces + 2);
+        const int B = (i + 0) + (diskFaces + 1);
         const int C = (i + 1);
-        const int D = (i + 1) + (diskFaces + 2);
+        const int D = (i + 1) + (diskFaces + 1);
         indexArray.append(
             A, B, C,
             B, D, C);
@@ -161,11 +189,10 @@ shared_ptr<Model> App::createCylinderModel(const float r, const float h) {
     return model;
 }
 
-void App::addCylinderToScene() {
+void App::addCylinderToScene(const shared_ptr<Model>& cylinderModel) {
     // Replace any existing cylinder model. Models don't 
     // have to be added to the model table to use them 
     // with a VisibleEntity.
-    const shared_ptr<Model>& cylinderModel = createCylinderModel(0.5, 1.0);
     if (scene()->modelTable().containsKey(cylinderModel->name())) {
         scene()->removeModel(cylinderModel->name());
     }
@@ -198,7 +225,14 @@ void App::addCylinderToScene() {
         dynamic_pointer_cast<VisibleEntity>(cylinder)->setModel(cylinderModel);
     }
 
-    cylinder->setFrame(CFrame::fromXYZYPRDegrees(0.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+    cylinder->setFrame(CFrame::fromXYZYPRDegrees(5.0f, -0.5f, -1.0f, 0.0f, 0.0f));
+}
+
+shared_ptr<Model> App::makeCylinder(const float r, const float h) {
+    const shared_ptr<ArticulatedModel> cylinderModel = createCylinderModel(r, h);
+
+    saveOFF(createCylinderModel(r, h), "../data-files/cylinder.off", "cylinder");
+    return cylinderModel;
 }
 
 
@@ -212,7 +246,8 @@ void App::onInit() {
     showRenderingStats      = false;
 
     loadScene("Ground");
-    addCylinderToScene();
+    const shared_ptr<Model> cylinderModel = makeCylinder(0.5, 1.5);
+    addCylinderToScene(cylinderModel);
 
     // Make the GUI after the scene is loaded because loading/rendering/simulation initialize
     // some variables that advanced GUIs may wish to reference with pointers.
