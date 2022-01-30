@@ -62,7 +62,7 @@ int main(int argc, const char* argv[]) {
 }
 
 
-App::App(const GApp::Settings& settings) : GApp(settings) {
+App::App(const GApp::Settings& settings) : GApp(settings), m_heightfieldSettings(std::make_shared<HeightfieldSettings>()) {
 }
 
 void App::saveOFF(const shared_ptr<ArticulatedModel>& model, const String& filename, const String& modelName) {
@@ -265,6 +265,38 @@ void App::makeGUI() {
     infoPane->addLabel("in App::onInit().");
     infoPane->addButton("Exit", [this]() { m_endProgram = true; });
     infoPane->pack();
+
+
+    // Heightfield pane
+    GuiPane* heightfieldPane = debugPane->addPane("Heightfield");
+
+    heightfieldPane->addNumberBox("Max Y", &(m_heightfieldSettings->yScale), "m",
+        GuiTheme::LOG_SLIDER, 0.0f, 100.0f)->setUnitsSize(30);
+
+    heightfieldPane->addNumberBox("XZ Scale", &(m_heightfieldSettings->xzScale), "m/px",
+        GuiTheme::LOG_SLIDER, 0.001f, 10.0f)->setUnitsSize(30);
+
+    heightfieldPane->beginRow(); {
+        heightfieldPane->addTextBox("Input Image", &(m_heightfieldSettings->source))->setWidth(210);
+        heightfieldPane->addButton("...", [this]() {
+            FileDialog::getFilename(m_heightfieldSettings->source, "png", false);
+            })->setWidth(30);
+    } heightfieldPane->endRow();
+
+    heightfieldPane->addButton("Generate", [this]() {
+        shared_ptr<Image> image;
+        try {
+            image = Image::fromFile(m_heightfieldSettings->source);
+
+            // ...insert your heightfield generation code here...
+
+        }
+        catch (...) {
+            msgBox("Unable to load the image.", m_heightfieldSettings->source);
+        }
+        });
+    heightfieldPane->pack();
+
 
     GuiPane* rendererPane = debugPane->addPane("DefaultRenderer", GuiTheme::ORNATE_PANE_STYLE);
 

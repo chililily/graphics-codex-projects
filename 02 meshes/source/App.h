@@ -7,8 +7,16 @@
 #pragma once
 #include <G3D/G3D.h>
 
+struct HeightfieldSettings {
+    float yScale = 10.0f;
+    float xzScale = 0.1f;
+    String source = String();
+};
+
 /** \brief Application framework. */
 class App : public GApp {
+    shared_ptr<HeightfieldSettings> m_heightfieldSettings;
+
 protected:
 
     /** Called from onInit */

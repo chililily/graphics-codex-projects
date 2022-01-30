@@ -150,9 +150,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="OFFdata_test.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\main.vcxproj">
       <Project>{b87d787e-e674-465a-aed3-8264ed17dfb1}</Project>
     </ProjectReference>

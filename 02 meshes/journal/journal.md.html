@@ -1,5 +1,17 @@
    <meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="https://casual-effects.com/markdeep/latest/journal.css?">
                  **Development Journal**
+2022-01-30:
+=====================================================
+**Day work time**: 45m
+
+**Total work time**: 8h30m
+
+Added heightfield GUI pane. Initial draft would crash the app due to incorrect initializing of `m_heightfieldSettings`.
+
+**Next time**: Work on heightfield generation from image: convert to grayscale; add vertex with calculated position (XZ image coordinates, Y from grayscale value of pixel); iterate through vertices and connect to make faces (two triangles per quad of vertices).
+
+Display a message on screen while generating and then flush the `G3D::ArticulatedModel` cache, and reload the current scene on completion.
+
 2022-01-26:
 =====================================================
 **Day work time**: 30m
@@ -8,7 +20,7 @@
 
 Tested and fixed `saveOFF`. Added results to report. Axed workflow section of report.
 
-**Next time**: Write a procedure that generates a regular heightfield in `data-files/model/heightfield.off` with elevation given by the grayscale values of an image file. Use a file dialog to select the file, a number box to scale the x and z integer coordinates by, and a number box to set the scale that 1.0 corresponds to for height. Make a button labelled “Generate” that launches the generator. Display a message on screen while generating and then flush the G3D::ArticulatedModel cache, and reload the current scene on completion.
+**Next time**: Write a procedure that generates a regular heightfield in `data-files/model/heightfield.off` with elevation given by the grayscale values of an image file. Use a file dialog to select the file, a number box to scale the x and z integer coordinates by, and a number box to set the scale that 1.0 corresponds to for height. Make a button labelled “Generate” that launches the generator. Display a message on screen while generating and then flush the `G3D::ArticulatedModel` cache, and reload the current scene on completion.
 
 2022-01-25:
 =====================================================
